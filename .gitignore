@@ -149,4 +149,4 @@ cython_debug/
 
 #html files for this project
 .html
-.
+*.html
