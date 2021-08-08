@@ -1,5 +1,5 @@
 # Requires Version 2.1.0, nothing higher or breaks!
-# (c) Webair 2019 - Angelo poggi
+# 2019 - Angelo poggi
 #Simple script that logs into a Mikrotik and creates a Mark down page so you can copy it to Confluence
 from librouteros import connect
 from creds import username, password
