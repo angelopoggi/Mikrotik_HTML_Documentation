@@ -8,11 +8,12 @@ import sys
 import click
 
 @click.command()
-@click.option('--firewall', '-f', help='Firewall you wish to create an HTML dump for', required=True)
-@click.option('--username', '-u', help='The username of the firewall you want to connect to', required=False)
-@click.option('--password', '-p', help='The password of the firewall you want to connect to', required=False)
-def html_dump(firewall, *args):
+@click.option('--firewall', '-f', help='Firewall you wish to create an HTML dump for', required=True, type=str)
+#@click.option('--username', '-u', help='The username of the firewall you want to connect to', required=False)
+#@click.option('--password', '-p', help='The password of the firewall you want to connect to', required=False)
+def html_dump(firewall):
     """script that logs into a Mikrotik and creates a Mark down file so you can use it on a webpage"""
+    print(firewall)
     connection = routeros_api.RouterOsApiPool(firewall, username=creds.username,
                                               password=creds.password,
                                               plaintext_login=True,
