@@ -9,5 +9,5 @@ except:
     echo("Please create a local .env file with local credentials")
     exit(1)
 
-username=os.getenv("username")
-password=os.getenv("password")
+USERNAME = os.getenv('username')
+PASSWORD = os.getenv("password")

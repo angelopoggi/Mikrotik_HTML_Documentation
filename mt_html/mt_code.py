@@ -3,9 +3,11 @@
 
 import routeros_api
 from json2html import *
-from mt_html import creds
+from mt_html.creds import USERNAME, PASSWORD
+from mt_html.dump_folder_gen import check_dump_folder
 import sys
 import click
+import pathlib
 
 @click.command()
 @click.option('--firewall', '-f', help='Firewall you wish to create an HTML dump for', required=True, type=str)
@@ -13,9 +15,9 @@ import click
 #@click.option('--password', '-p', help='The password of the firewall you want to connect to', required=False)
 def html_dump(firewall):
     """script that logs into a Mikrotik and creates a Mark down file so you can use it on a webpage"""
-    print(firewall)
-    connection = routeros_api.RouterOsApiPool(firewall, username=creds.username,
-                                              password=creds.password,
+    click.echo(f"Connecting to {firewall}")
+    connection = routeros_api.RouterOsApiPool(firewall, username=USERNAME,
+                                              password=PASSWORD,
                                               plaintext_login=True,
                                               use_ssl=False,
                                               port=8728)
@@ -111,7 +113,8 @@ def html_dump(firewall):
     hostname_payload = json2html.convert(json=hostname_results)
 
     click.echo(f'Creating File {firewall}.html')
-    with open(f'{firewall}.html', 'w+') as doc_html:
+    path = check_dump_folder()
+    with open(f'{path}/{firewall}.html', 'w+') as doc_html:
         doc_html.write(f'<h1>{firewall}</h1>\n')
         doc_html.write(hostname_payload)
         doc_html.write(f'<h1>System ID</h1>\n')
