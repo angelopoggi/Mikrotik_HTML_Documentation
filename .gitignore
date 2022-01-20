@@ -150,3 +150,7 @@ cython_debug/
 #html files for this project
 .html
 *.html
+
+#mac shit
+.DS_Store
+.DS_Store/*
