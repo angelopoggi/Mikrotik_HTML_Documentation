@@ -7,17 +7,13 @@ from mt_html.creds import USERNAME, PASSWORD
 from mt_html.dump_folder_gen import check_dump_folder
 import sys
 import click
-import pathlib
 
-@click.command()
-@click.option('--firewall', '-f', help='Firewall you wish to create an HTML dump for', required=True, type=str)
-#@click.option('--username', '-u', help='The username of the firewall you want to connect to', required=False)
-#@click.option('--password', '-p', help='The password of the firewall you want to connect to', required=False)
+
 def html_dump(firewall):
     """script that logs into a Mikrotik and creates a Mark down file so you can use it on a webpage"""
     click.echo(f"Connecting to {firewall}")
-    connection = routeros_api.RouterOsApiPool(firewall, username=USERNAME,
-                                              password=PASSWORD,
+    connection = routeros_api.RouterOsApiPool(str(firewall), username=str(USERNAME),
+                                              password=str(PASSWORD),
                                               plaintext_login=True,
                                               use_ssl=False,
                                               port=8728)
